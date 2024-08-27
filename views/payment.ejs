@@ -1,0 +1,77 @@
+<%- include('partials/header.ejs') %>
+
+<main>
+      <div class="container-payment-page">
+        
+        <form action="/ordered" method="get">
+          <!-- Billing Information -->
+          <div class="section-payment-page section-billing">
+            <h2 class="title-payment-page">Billing Information</h2>
+
+            <div class="input-group-payment-page">
+                <input type="text" id="fullName" name="fullName" placeholder="Full Name" required class="input-payment-page">
+            </div>
+
+            <div class="input-group-payment-page">
+                <input type="email" id="email" name="email" placeholder="Email Address" required class="input-payment-page">
+            </div>
+
+            <div class="input-group-payment-page">
+                <input type="text" id="address" name="address" placeholder="Street Address" required class="input-payment-page">
+            </div>
+
+            <div class="input-group-payment-page inline-input-group-payment-page">
+                <div class="inline-input-group-payment-page">
+                    <input type="text" id="city" name="city" placeholder="City" required class="input-payment-page">
+                </div>
+                <div class="inline-input-group-payment-page">
+                    <input type="text" id="state" name="state" placeholder="State" required class="input-payment-page">
+                </div>
+                <div class="inline-input-group-payment-page">
+                    <input type="text" id="postalCode" name="postalCode" placeholder="Postal Code" required class="input-payment-page">
+                </div>
+            </div>
+
+            <div class="input-group-payment-page">
+                <select id="country" name="country" required class="input-payment-page">
+                    <option value="">Select Country</option>
+                    <option value="India">India</option>
+                    <option value="USA">USA</option>
+                    <option value="Canada">Canada</option>
+                    <!-- Add more countries as needed -->
+                </select>
+            </div>
+          </div>
+
+          <!-- Payment Details -->
+          <div class="section-payment-page section-payment-details">
+            <h2 class="title-payment-page">Payment Details</h2>
+
+            <div class="input-group-payment-page">
+                <input type="text" id="cardName" name="cardName" placeholder="Name on Card" required class="input-payment-page">
+            </div>
+
+            <div class="input-group-payment-page">
+                <input type="text" id="cardNumber" name="cardNumber" placeholder="Card Number" required class="input-payment-page">
+            </div>
+
+            <div class="input-group-payment-page inline-input-group-payment-page">
+                <div class="inline-input-group-payment-page">
+                    <input type="text" id="expiryDate" name="expiryDate" placeholder="Expiry Date (MM/YY)" required class="input-payment-page">
+                </div>
+                <div class="inline-input-group-payment-page">
+                    <input type="text" id="cvv" name="cvv" placeholder="CVV" required class="input-payment-page">
+                </div>
+            </div>
+            <img src="./assets/images/payment-mehtod.png" width="311" height="30" loading="lazy" alt="Payment method"
+          class="w-100">
+          </div>
+
+          <!-- Payment Button -->
+            <button type="submit" class="button-payment-page">Complete Payment</button>
+        </form>
+      </div>
+
+</main>
+
+  <%- include('partials/footer.ejs') %>

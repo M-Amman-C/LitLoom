@@ -1,0 +1,29 @@
+<%- include('partials/header.ejs') %>
+
+<main>
+  <div>
+  <h1 style="text-align: center;">Log into your Account</h1>
+  
+  <div  id="registerForm" style="width: 50%;">
+    <form action="/login" method="POST">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" class="input-field">
+      <br>
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" class="input-field">
+      <br>
+      <% if (message!=" "){ %>
+        <p style="color:red"><%= message %></p>
+        <br>
+      <% } %>
+    
+      <button type="submit" class="btn" id="register-btn">Login</button>
+    </form>
+    <a href="/register">
+      <button type="submit" class="btn" style="margin-top: 20px;">Create Account Instead</button>
+    </a>
+  </div>
+</div>
+</main>
+
+  <%- include('partials/footer.ejs') %>

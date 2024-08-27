@@ -1,0 +1,77 @@
+<%- include('partials/header.ejs') %>
+
+<main>
+  <h1 style="margin-left: 100px;">Confirm Order</h1>
+  <br>
+  <br>
+  <div class="cart-product-list">
+      
+    <% books.forEach(book => { %>
+    <div class="cart-product-item" style="margin-left: 100px;">
+      <div class="cart-product-details">
+          <div style="font-weight: bold;"><%= book.title %></div>
+          <div>Price: Rs. <%= book.price %></div>
+          <div>Quantity: <%= book.quantity %></div>
+          <div>Total: Rs. <%= (book.price * book.quantity).toFixed(2) %></div>
+      </div>
+      <img src="./assets/images/<%= book.cover_image_url %>.png" alt=<%= book.title %> class="cart-product-image">
+    </div>
+    <br>
+    <% }) %>
+    
+    <hr width="1520px">
+    
+    <br><br>
+    <h1 style="margin-left: 100px;">Shipping Address</h1><br>
+    <div style="font-size:x-large; margin-left:100px;">
+      <p><%= address[0].street_address %>, <%= address[0].city %>, <%= address[0].state %></p>
+      <p><%= address[0].postal_code %></p>
+    </div>
+    <br><br>
+    <hr width="1520px">
+
+    <div style="display: flex; align-items: flex-start; margin: 50px 0 0 100px;">
+      <div class="cart-summary" style="font-size: larger; height: fit-content;">
+          <h2>Cart Summary</h2>
+          <p><strong>Total Items:</strong> <%= totalItems %></p>
+          <p><strong>Subtotal:</strong> Rs. <%= subtotal %></p>
+          <p><strong>Shipping:</strong> Rs. <%= shipping.toFixed(2) %></p>
+          <p><strong>Total:</strong> Rs. <%= total %></p>
+      </div>
+
+      <div style="margin-left: auto; display: flex; flex-direction: column; gap: 20px;margin-top:50px; font-size:larger">
+        <p><strong>Order will Arrive by:</strong> <span id="two-days-later"></span></p>
+      </div>
+      <div style="margin-left: auto; display: flex; flex-direction: column; gap: 20px;margin-top:50px">
+          <a href="/payment" class="cart-button" style="text-align: center;">Proceed to Checkout</a>
+          <a href="/cart" class="return-cart-button" style="text-align: center;">Return to Cart</a>
+      </div>
+    </div>
+    <br>
+    <br>
+  </div>
+</main>
+
+<script>
+  // Function to format date as YYYY-MM-DD and include the day
+  function formatDateWithDay(date) {
+      const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+      let dayOfWeek = daysOfWeek[date.getDay()];
+      let day = ("0" + date.getDate()).slice(-2);
+      let month = ("0" + (date.getMonth() + 1)).slice(-2);
+      let year = date.getFullYear();
+      return `${dayOfWeek}, ${year}-${month}-${day}`;
+  }
+
+  // Get current date
+  let currentDate = new Date();
+
+  // Get date two days later
+  let twoDaysLater = new Date();
+  twoDaysLater.setDate(currentDate.getDate() + 2);
+
+  // Set the dates in the HTML
+  document.getElementById("two-days-later").textContent = formatDateWithDay(twoDaysLater);
+</script>
+
+  <%- include('partials/footer.ejs') %>
