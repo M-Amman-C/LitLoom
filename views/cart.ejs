@@ -1,0 +1,55 @@
+<%- include('partials/header.ejs') %>
+
+<main>
+  <h1 style="text-align: center;">Shopping Cart</h1>
+  <br>
+  <br>
+  <div class="cart-container">
+    <!-- Cart Summary -->
+    
+    <% if (totalItems==0){ %>
+      <h1 style="margin-bottom: 200px;">No items in cart</h1>
+    <% }else{ %>
+      <div class="cart-summary">
+        <h2>Cart Summary</h2>
+        <p><strong>Total Items:</strong> <%= totalItems %></p>
+        <p><strong>Subtotal:</strong> Rs. <%= subtotal %></p>
+        <p><strong>Shipping:</strong> Rs. <%= shipping.toFixed(2) %></p>
+        <p><strong>Total:</strong> Rs. <%= total %></p>
+        <br>
+        <a href="/orderconfirmation" class="cart-button">Proceed to Checkout</a>
+      </div>
+
+      <!-- Product List -->
+      <div class="cart-product-list">
+      
+        <% books.forEach(book => { %>
+        <div class="cart-product-item">
+          <div class="cart-product-details">
+              <div style="font-weight: bold;"><%= book.title %></div>
+              <div>by <%= book.author %></div>
+              <div>Price: Rs. <%= book.price %></div>
+              <div>Quantity: <%= book.quantity %></div>
+              <div>Total: Rs. <%= (book.price * book.quantity).toFixed(2) %></div>
+              <div>
+                <form action="/cartaction" method="post">
+                <input type="hidden" id="bookId" name="bookId" value=<%= book.book_id %>>
+                <input type="hidden" id="status" name="status" value="del">
+                <button class="cart-button">Remove</button>
+                </form>
+              </div>
+          </div>
+          <img src="./assets/images/<%= book.cover_image_url %>.png" alt=<%= book.title %> class="cart-product-image">
+        </div>
+        <br>
+        <% }) %>
+
+      </div>
+      <% } %>
+  </div>
+</main>
+
+<%- include('partials/footer.ejs') %>
+
+<!-- Link to external CSS -->
+<link rel="stylesheet" href="styles.css">

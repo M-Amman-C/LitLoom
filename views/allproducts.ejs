@@ -1,0 +1,47 @@
+<%- include('partials/header.ejs') %>
+
+<main>
+
+
+      <!-- 
+        - #COMPLETE COLLECTION
+      -->
+
+      <section class="section featured" aria-label="featured collection">
+        <div class="container">
+          <h2 class="h2 section-title">Complete Collection</h2>
+          <p class="section-text">
+
+          </p>
+          <ul class="grid-list">
+            <% for (let i = 0; i < books.length; i++) { %>
+              <li>
+                <div class="product-card">
+                  <span class="card-badge">New</span>
+                  
+                  <div class="card-banner img-holder" style="--width: 384; --height: 480;">
+                    <img src="./assets/images/<%= books[i].cover_image_url %>.png" width="384" height="480" loading="lazy" alt="<%= books[i].title %>" class="img-cover">
+                    <div class="card-action">
+                      <button type="submit" class="action-btn" data-id="<%= books[i].id %>" aria-label="quick view" title="Quick View">
+                        <ion-icon name="eye-outline" aria-hidden="true"></ion-icon>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="card-content">
+                    <h3 class="h3">
+                      <a href="#" class="card-title"><%= books[i].title %></a>
+                    </h3>
+                    <data class="card-price" value="<%= books[i].cost %>">Rs. <%= books[i].price %></data>
+                  </div>
+                </div>
+              </li>
+            <% } %>
+          </ul>
+        </div>
+      </section>
+
+      <script type="module" src="./js/getId.js"></script>
+
+    </main>
+  
+  <%- include('partials/footer.ejs') %>

@@ -1,0 +1,32 @@
+<%- include('partials/header.ejs') %>
+
+<main>
+  
+  <div class="container-profile-page">
+    <div class="section-profile-page">
+        <h1 class="title-profile-page">Your Profile</h1>
+        <br>
+        
+        <div class="profile-details-profile-page">
+            <h2 class="subtitle-profile-page">Profile Details</h2>
+            <p><strong>Full Name:</strong> <%= info[0].full_name %></p>
+            <p><strong>Username:</strong>  <%= info[0].username %></p>
+            <p><strong>Email:</strong>  <%= info[0].email %></p>
+            <p><strong>Street Address:</strong>  <%= info[0].street_address %></p>
+            <p><strong>City:</strong>  <%= info[0].city %></p>
+            <p><strong>State:</strong>  <%= info[0].state %></p>
+            <p><strong>Postal Code:</strong>  <%= info[0].postal_code %></p>
+            <p><strong>Country:</strong>  <%= info[0].country %></p>
+        </div>
+
+        <div class="button-group-profile-page">
+            <a href="/editprofile" class="btn btn-primary">Edit Profile</a>
+            <a href="/vieworders" class="btn btn-primary">View Past Orders</a>
+            <a href="/" class="btn btn-primary">Return to Homepage</a>
+        </div>
+    </div>
+</div>
+
+</main>
+
+  <%- include('partials/footer.ejs') %>

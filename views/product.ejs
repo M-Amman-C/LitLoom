@@ -1,0 +1,29 @@
+<%- include('partials/header.ejs') %>
+
+<main>
+
+  <div style="width: 80%; margin: 0 auto; overflow: hidden;">
+    <div style="display: flex; align-items: flex-start; margin-top: 20px; padding: 30px; border-radius: 8px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);">
+        <img src="/assets/images/<%= book[0].cover_image_url %>.png" alt="<%= book[0].title %> Cover" style="max-width: 500px; margin-right: 30px; border-radius: 8px;">
+        <div style="max-width: 700px;">
+            <h2 style="margin-top: 0; font-size: 2em;"><%= book[0].title %></h2>
+            <p style="line-height: 1.6; margin: 10px 0; font-size: 1.2em;"><strong>Author:</strong> <%= book[0].author %></p>
+            <p style="line-height: 1.6; margin: 10px 0; font-size: 1.2em;"><strong>ISBN:</strong> <%= book[0].isbn %></p>
+            <p style="line-height: 1.6; margin: 10px 0; font-size: 1.2em;"><strong>Publisher:</strong> <%= book[0].publisher %></p>
+            <p style="line-height: 1.6; margin: 10px 0; font-size: 1.2em;"><strong>Publication Date:</strong> <%= book[0].published_date %></p>
+            <p style="line-height: 1.6; margin: 10px 0; font-size: 1.2em;"><strong>Description:</strong> <%= book[0].description %></p>
+            <p style="line-height: 1.6; margin: 10px 0; font-size: 1.2em;"><strong>Page Count:</strong> <%= book[0].page_count %></p>
+            <p style="line-height: 1.6; margin: 10px 0; font-size: 1.2em;"><strong>Genre:</strong> <%= book[0].genre %></p>
+            <p style="font-size: 2em; color: #e74c3c; margin-top: 10px;">Rs. <%= book[0].price %></p>
+        </div>
+    </div>
+    <form action="/cartaction" method="post">
+      <input type="hidden" id="bookId" name="bookId" value=<%= book[0].id %>>
+      <input type="hidden" id="status" name="status" value="add">>
+      <button class="btn" style="position:absolute;margin: -90px 0 0 150px">Add to Cart</button>
+    </form>
+</div>
+
+</main>
+
+  <%- include('partials/footer.ejs') %>
