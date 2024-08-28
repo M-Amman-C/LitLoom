@@ -1614,3 +1614,59 @@ body.profile-page {
 .order-item-past-orders p {
   margin: 5px 0;
 }
+
+/*-----------------------------------*\
+  #Order Details Page
+\*-----------------------------------*/
+
+.container-order-details {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.order-details-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.order-info-order-details {
+  flex: 1;
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  text-align: left;
+  border: solid 1px #fff;
+  font-size: larger;
+}
+
+.products-container {
+  flex: 2;
+}
+
+.cart-product-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.cart-product-item {
+  display: flex;
+  align-items: center;
+  border: solid 1px #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cart-product-details {
+  flex: 1;
+}
+
+.cart-product-image {
+  width: 100px;
+  height: auto;
+  margin-left: 20px;
+}
+

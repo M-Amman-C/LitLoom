@@ -23,6 +23,8 @@ db.connect();
 let data;
 let login=false;
 let curr_id=0;
+let curr_order = 0;
+
 //middleware
 
 app.use(express.static("public"));
@@ -118,7 +120,10 @@ app.get("/cart", async (req,res)=>{
             
             const totalItems = result.rows.reduce((sum, item) => sum + item.quantity, 0);
             const subtotal = result.rows.reduce((sum, item) => sum + (item.price * item.quantity), 0)
-            const shipping = 50.00; // Example shipping cost
+            let shipping = 50.00;
+            if (subtotal>500){
+                shipping = 0;
+            }
             const total = (parseFloat(subtotal) + shipping)
 
             res.render("cart.ejs",{books: result.rows, totalItems,subtotal,shipping,total});
@@ -180,8 +185,6 @@ app.post("/payment", async(req,res)=>{
             );
 
             const order_id = orderResult.rows[0].order_id;
-
-            console.log(order_id);
 
             for (let item of result.rows) {
                 await db.query(
@@ -269,9 +272,15 @@ app.get("/vieworders", async (req,res)=>{
         res.redirect("/login");
     } else{
         const result = await db.query("SELECT * FROM orders WHERE cust_id=$1",[curr_id]);
-        console.log(result.rows);
+        
         res.render("vieworders.ejs",{orders: result.rows});
     }
+})
+
+app.post("/vieworders", (req,res)=>{
+    console.log(req.body);
+    curr_order=req.body.order_id;
+    res.redirect("/orderdetails");
 })
 
 
@@ -286,11 +295,24 @@ app.get("/editprofile", async (req,res)=>{
 
 app.post("/updateprofile", async (req,res)=>{
     const {streetAddress,city,state,postalCode,country} = req.body;
-    console.log(streetAddress,city,state,postalCode,country);
     await db.query("UPDATE customers set street_address=$1, city=$2, state=$3, postal_code=$4, country=$5 WHERE cust_id=$6",[streetAddress,city,state,postalCode,country,curr_id]);
     res.redirect("/profile");
 })
 
+
+app.get("/orderdetails/", async (req,res)=>{
+    if (!login){
+        res.redirect("/login");
+    } else{
+        const orderId = curr_order;
+        const orderItemsQuery ="SELECT books.id, books.title, books.author, books.price, books.cover_image_url, order_items.quantity FROM order_items INNER JOIN books ON order_items.book_id = books.id WHERE order_items.order_id =$1";
+        const result = await db.query(orderItemsQuery,[orderId]);
+        const orderResult = await db.query("SELECT * FROM orders WHERE order_id=$1",[orderId]);
+        
+        console.log(orderResult.rows);
+        res.render("orderdetails.ejs",{order:orderResult.rows, items:result.rows});
+    }  
+})
 
 app.listen(port, () => {
     console.log(`Server running on http://localhost:${port}`);

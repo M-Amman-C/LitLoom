@@ -1,0 +1,41 @@
+<%- include('partials/header.ejs') %>
+
+<main>
+  <div class="container-order-details">
+    <div class="order-details-container" style="width: 1000px;">
+      <!-- Order Information -->
+      <div class="order-info-order-details" style="border: solid 1px white; height:fit-content; margin-top:35px;">
+        <h1 class="title-order-details">Order Details</h1>
+        <p><strong>Order ID:</strong> <%= order[0].order_id %></p>
+        <p><strong>Date:</strong> <%= new Date(order[0].order_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
+        <p><strong>Total Amount:</strong> Rs. <%= order[0].total_amount %></p>
+        <p><strong>Status:</strong> <%= order[0].status %></p>
+        <br>
+    <a href="/vieworders" class="btn btn-primary">Back</a>
+      </div>
+      
+
+      <!-- Products in this Order -->
+      <div style="margin-left: 100px;">
+      <div class="products-container" style="width: 1000px; margin-left:100px">
+        <h2 class="subtitle-order-details">Products in this Order</h2>
+        <div class="cart-product-list">
+          <% items.forEach(book => { %>
+          <div class="cart-product-item">
+            <div class="cart-product-details">
+              <div style="font-weight: bold;"><%= book.title %></div>
+              <div>Price: Rs. <%= book.price %></div>
+              <div>Quantity: <%= book.quantity %></div>
+              <div>Total: Rs. <%= (book.price * book.quantity).toFixed(2) %></div>
+            </div>
+            <img src="./assets/images/<%= book.cover_image_url %>.png" alt="<%= book.title %>" class="cart-product-image">
+          </div>
+          <% }) %>
+        </div>
+      </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<%- include('partials/footer.ejs') %>

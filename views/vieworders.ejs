@@ -1,7 +1,6 @@
 <%- include('partials/header.ejs') %>
 
 <main>
-  
     <div class="container-past-orders" style="align-content: center;">
         <h1 class="title-past-orders">Your Past Orders</h1>
         
@@ -13,7 +12,10 @@
                 <p><strong>Total:</strong> Rs. <%= order.total_amount %></p>
                 <p><strong>Status:</strong> <%= order.status %></p>
                 <br>
-                <a href="/orderdetails/<%= order.order_id %>" class="btn btn-primary" style="margin: 0 auto">View Details</a>
+                <form action="/vieworders" method="post">
+                    <input type="hidden" name="order_id" value="<%= order.order_id %>">
+                    <button type="submit" class="btn btn-primary" style="margin: 0 auto">View Details</button>
+                </form>
                 <br>
             </div>
             <br>
