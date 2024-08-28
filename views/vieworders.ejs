@@ -1,0 +1,25 @@
+<%- include('partials/header.ejs') %>
+
+<main>
+  
+    <div class="container-past-orders" style="align-content: center;">
+        <h1 class="title-past-orders">Your Past Orders</h1>
+        
+        <!-- Order List -->
+        <% orders.forEach(function(order) { %>
+            <div class="order-item-past-orders">
+                <h2>Order #<%= order.order_id %></h2>
+                <p><strong>Date:</strong> <%= new Date(order.order_date).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' }) %></p>
+                <p><strong>Total:</strong> Rs. <%= order.total_amount %></p>
+                <p><strong>Status:</strong> <%= order.status %></p>
+                <br>
+                <a href="/orderdetails/<%= order.order_id %>" class="btn btn-primary" style="margin: 0 auto">View Details</a>
+                <br>
+            </div>
+            <br>
+        <% }); %>
+    </div>
+
+</main>
+
+  <%- include('partials/footer.ejs') %>

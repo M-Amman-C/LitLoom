@@ -1572,3 +1572,45 @@ body.profile-page {
   justify-content: space-between;
   margin-top: 20px;
 }
+
+/*-----------------------------------*\
+  #Profile Page
+\*-----------------------------------*/
+
+/* Container */
+.container-past-orders {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 600px; /* Adjust this to fit your design */
+}
+
+/* Title */
+.title-past-orders {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+}
+
+/* Order List */
+.orders-past-orders {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+/* Order Item */
+.order-item-past-orders {
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+}
+
+/* Order Details */
+.order-item-past-orders h2 {
+  margin: 0 0 10px;
+  font-size: 20px;
+}
+
+.order-item-past-orders p {
+  margin: 5px 0;
+}

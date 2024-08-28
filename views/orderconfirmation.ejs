@@ -34,9 +34,9 @@
       <div class="cart-summary" style="font-size: larger; height: fit-content;">
           <h2>Cart Summary</h2>
           <p><strong>Total Items:</strong> <%= totalItems %></p>
-          <p><strong>Subtotal:</strong> Rs. <%= subtotal %></p>
+          <p><strong>Subtotal:</strong> Rs. <%= subtotal.toFixed(2) %></p>
           <p><strong>Shipping:</strong> Rs. <%= shipping.toFixed(2) %></p>
-          <p><strong>Total:</strong> Rs. <%= total %></p>
+          <p><strong>Total:</strong> Rs. <%= total.toFixed(2) %></p>
       </div>
 
       <div style="margin-left: auto; display: flex; flex-direction: column; gap: 20px;margin-top:50px; font-size:larger">

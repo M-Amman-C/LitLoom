@@ -167,6 +167,34 @@ app.get("/payment", (req,res)=>{
     res.render("payment.ejs");
 })
 
+app.post("/payment", async(req,res)=>{
+    const result = await db.query("SELECT cart.book_id, cart.quantity, books.title, books.author, books.price, books.cover_image_url FROM cart JOIN books ON cart.book_id = books.id WHERE cart.cust_id = $1",[curr_id]);
+            
+            const subtotal = result.rows.reduce((sum, item) => sum + (item.price * item.quantity), 0)
+            const shipping = 5.00; // Example shipping cost
+            const total = (parseFloat(subtotal) + shipping)
+
+            const orderResult = await db.query(
+                "INSERT INTO orders (cust_id, total_amount, status) VALUES ($1, $2, $3) RETURNING order_id",
+                [curr_id, total, 'Processing']
+            );
+
+            const order_id = orderResult.rows[0].order_id;
+
+            console.log(order_id);
+
+            for (let item of result.rows) {
+                await db.query(
+                    "INSERT INTO order_items (order_id, book_id, quantity, price) VALUES ($1, $2, $3, $4)",
+                    [order_id, item.book_id, item.quantity, item.price]
+                );
+            }
+            
+            await db.query("DELETE FROM cart WHERE cust_id = $1", [curr_id]);
+
+            res.redirect("/ordered");
+})
+
 app.get("/product", async (req,res)=>{
     if (!login){
         res.redirect("/login")
@@ -233,6 +261,16 @@ app.get("/profile", async (req,res)=>{
     } else{
         const result = await db.query("SELECT * FROM customers WHERE cust_id=$1",[curr_id]);
         res.render("profile.ejs",{info: result.rows});
+    }
+})
+
+app.get("/vieworders", async (req,res)=>{
+    if (!login){
+        res.redirect("/login");
+    } else{
+        const result = await db.query("SELECT * FROM orders WHERE cust_id=$1",[curr_id]);
+        console.log(result.rows);
+        res.render("vieworders.ejs",{orders: result.rows});
     }
 })
 
